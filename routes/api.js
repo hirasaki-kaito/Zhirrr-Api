@@ -907,43 +907,6 @@ router.get('/textmaker/metallic', async (req, res, next) => {
                 	console.log(e);
                 res.json(loghandler.error)
                 }
-        if (theme == 'fire') {
-            try {
-            request.post({
-                url: "https://photooxy.com/logo-and-text-effects/realistic-flaming-text-effect-online-197.html",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `text_1=${text}&login=OK`,
-                }, (e,r,b) => {
-                    if (!e) {
-                        $ = cheerio.load(b)
-                        $(".thumbnail").find("img").each(function() {
-                            h = $(this).attr("src")
-                            var result = "https://photooxy.com/"+h
-                            fetch(encodeURI(`https://api.imgbb.com/1/upload?expiration=120&key=761ea2d5575581057a799d14e9c78e28&image=${result}&name=${randomTextNumber}`))
-                                .then(response => response.json())
-                                .then(data => {
-                                    var urlnya = data.data.url,
-                                        delete_url = data.data.delete_url;
-                                        res.json({
-                                            status : true,
-                                            creator : `${creator}`,
-                                            message : `Jangan Lupa Subscribe ${creator}`,
-                                            result:{
-                                                url:urlnya,
-                                                delete_url: delete_url,
-                                                info: 'url akan hilang setelah 2 menit'
-                                            }
-                                        })
-                                })
-                        })
-                    }
-                })
-                } catch (e) {
-                	console.log(e);
-                res.json(loghandler.error)
-                }
         } else if (theme == 'glow') {
             request.post({
                 url: "https://photooxy.com/other-design/create-metallic-text-glow-online-188.html",
